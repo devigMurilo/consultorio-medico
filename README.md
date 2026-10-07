@@ -1,6 +1,6 @@
-# Escola de Música (web)
+# Consultorio Medico (web)
 
-App de exemplo da disciplina de POS: cliente web em React para a API de agendamentos, seguindo a especificação da Escola de Música. Os endpoints estão na documentação da API (Swagger).
+App da disciplina de POS: cliente web em React para a API de agendamentos
 
 Feito a partir do *template* React do Vite, com [React Bootstrap](https://react-bootstrap.netlify.app/), [Bootstrap Icons](https://icons.getbootstrap.com/) e [React Router](https://reactrouter.com/). O histórico de *commits* mostra o app sendo construído passo a passo.
 
