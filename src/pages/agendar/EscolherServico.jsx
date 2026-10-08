@@ -17,7 +17,7 @@ export function EscolherServico() {
     if (recurso) {
       return `/agendar/horario?servico=${servico.id}&recurso=${recurso}`
     }
-    return `/agendar/professor?servico=${servico.id}`
+    return `/agendar/medico?servico=${servico.id}`
   }
 
   return (
@@ -33,7 +33,7 @@ export function EscolherServico() {
                 <Card.Img variant="top" src={servico.imagem} />
               ) : (
                 <div className="text-center bg-body-tertiary py-4">
-                  <i className="bi bi-music-note-list display-4 text-secondary"></i>
+                  <i className="bi bi-heart-pulse display-4 text-secondary"></i>
                 </div>
               )}
               <Card.Body>

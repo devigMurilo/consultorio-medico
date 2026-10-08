@@ -22,7 +22,7 @@ export function Menu() {
               <Nav.Link as={NavLink} to="/admin/confirmar">A confirmar</Nav.Link>
               <NavDropdown title="Cadastros">
                 <NavDropdown.Item as={Link} to="/admin/negocio">Dados do negócio</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/admin/recursos">Professores e salas</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/recursos">Médicos</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/admin/servicos">Serviços</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link as={NavLink} to="/admin/avaliacoes">Avaliações</Nav.Link>
@@ -33,8 +33,8 @@ export function Menu() {
               {pode('api.add_agendamento') && (
                 <Nav.Link as={NavLink} to="/agendar">Agendar</Nav.Link>
               )}
-              <Nav.Link as={NavLink} to="/aulas">Minhas aulas</Nav.Link>
-              <Nav.Link as={NavLink} to="/professores">Professores e salas</Nav.Link>
+              <Nav.Link as={NavLink} to="/consultas">Minhas consultas</Nav.Link>
+              <Nav.Link as={NavLink} to="/medicos">Médicos</Nav.Link>
             </Nav>
           )}
           <Nav>

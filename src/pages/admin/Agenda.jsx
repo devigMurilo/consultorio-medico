@@ -1,8 +1,8 @@
 import { Alert, Col, Form, ListGroup, Row } from 'react-bootstrap'
 import { useSearchParams } from 'react-router-dom'
 import { buscarTodas } from '../../api/client'
-import { AulaItem } from '../../components/AulaItem'
 import { Carregando } from '../../components/Carregando'
+import { ConsultaItem } from '../../components/ConsultaItem'
 import { Erro } from '../../components/Erro'
 import { SeletorData } from '../../components/SeletorData'
 import { hoje } from '../../formatos'
@@ -17,7 +17,7 @@ export function Agenda() {
   if (recurso) {
     caminho += `&recurso=${recurso}`
   }
-  const aulas = useApi(caminho, buscarTodas)
+  const consultas = useApi(caminho, buscarTodas)
   const recursos = useApi('/recursos/', buscarTodas)
 
   function mudar(nome, valor) {
@@ -35,7 +35,7 @@ export function Agenda() {
         </Col>
         <Col md={6}>
           <Form.Select className="mb-4" value={recurso} onChange={e => mudar('recurso', e.target.value)}>
-            <option value="">Todos os professores e salas</option>
+            <option value="">Todos os médicos</option>
             {recursos.dados?.map(r => (
               <option key={r.id} value={r.id}>{r.nome}</option>
             ))}
@@ -43,12 +43,12 @@ export function Agenda() {
         </Col>
       </Row>
 
-      {aulas.erro && <Erro erro={aulas.erro} tentarDeNovo={aulas.recarregar} />}
-      {aulas.carregando && <Carregando />}
-      {aulas.dados?.length === 0 && <Alert variant="info">Nenhuma aula neste dia.</Alert>}
+      {consultas.erro && <Erro erro={consultas.erro} tentarDeNovo={consultas.recarregar} />}
+      {consultas.carregando && <Carregando />}
+      {consultas.dados?.length === 0 && <Alert variant="info">Nenhuma consulta neste dia.</Alert>}
       <ListGroup>
-        {aulas.dados?.map(aula => (
-          <AulaItem key={aula.id} aula={aula} mostrarAluno />
+        {consultas.dados?.map(consulta => (
+          <ConsultaItem key={consulta.id} consulta={consulta} mostrarPaciente />
         ))}
       </ListGroup>
     </>

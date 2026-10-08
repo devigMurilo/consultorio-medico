@@ -29,7 +29,7 @@ As variáveis são lidas pelo Vite (`import.meta.env`) em `src/api/client.js`. O
 
 As variáveis são lidas no momento do *build*: ao trocar alguma, faça o *deploy* de novo.
 
-O `vercel.json` faz todas as rotas abrirem o `index.html`. Sem ele, recarregar a página em um endereço como `/aulas/9` daria erro 404, porque essas rotas só existem dentro do React (React Router).
+O `vercel.json` faz todas as rotas abrirem o `index.html`. Sem ele, recarregar a página em um endereço como `/consultas/9` daria erro 404, porque essas rotas só existem dentro do React (React Router).
 
 ## Organização do código
 
@@ -41,7 +41,7 @@ src/
 ├── hooks/useApi.js    # useApi (buscar dados) e usePaginado (listas com "Carregar mais")
 ├── formatos.js        # datas, horas e preços em pt-BR
 ├── custom.scss        # cores do Bootstrap personalizadas
-├── components/        # peças reutilizadas: Menu, Layout, Erro, Carregando, AulaItem...
+├── components/        # peças reutilizadas: Menu, Layout, Erro, Carregando, ConsultaItem...
 └── pages/             # uma tela por arquivo
     ├── agendar/       # fluxo de agendamento (C2 a C6)
     └── admin/         # telas do administrador (A1 a A10)

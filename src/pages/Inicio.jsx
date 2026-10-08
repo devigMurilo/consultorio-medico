@@ -2,23 +2,23 @@ import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import { useAuth } from '../AuthContext'
-import { AulaItem } from '../components/AulaItem'
 import { Carregando } from '../components/Carregando'
+import { ConsultaItem } from '../components/ConsultaItem'
 import { Erro } from '../components/Erro'
 import { hoje } from '../formatos'
 import { useApi } from '../hooks/useApi'
 
-function ehProxima(aula) {
-  return ['solicitado', 'confirmado'].includes(aula.status) && new Date(aula.fim) > new Date()
+function ehProxima(consulta) {
+  return ['solicitado', 'confirmado'].includes(consulta.status) && new Date(consulta.fim) > new Date()
 }
 
-// percorre as páginas até achar a primeira aula que ainda não passou
-async function buscarProximaAula(caminho) {
+// percorre as páginas até achar a primeira consulta que ainda não passou
+async function buscarProximaConsulta(caminho) {
   let proxima = caminho
   while (proxima) {
     const dados = await api(proxima)
-    const aula = dados.results.find(ehProxima)
-    if (aula) return aula
+    const consulta = dados.results.find(ehProxima)
+    if (consulta) return consulta
     proxima = dados.next
   }
   return null
@@ -27,11 +27,11 @@ async function buscarProximaAula(caminho) {
 export function Inicio() {
   const { usuario } = useAuth()
   const organizacao = useApi('/organizacao/')
-  const aula = useApi(`/agendamentos/?data_inicio=${hoje()}`, buscarProximaAula)
+  const consulta = useApi(`/agendamentos/?data_inicio=${hoje()}`, buscarProximaConsulta)
 
   if (organizacao.erro) return <Erro erro={organizacao.erro} tentarDeNovo={organizacao.recarregar} />
-  if (aula.erro) return <Erro erro={aula.erro} tentarDeNovo={aula.recarregar} />
-  if (organizacao.carregando || aula.carregando) return <Carregando />
+  if (consulta.erro) return <Erro erro={consulta.erro} tentarDeNovo={consulta.recarregar} />
+  if (organizacao.carregando || consulta.carregando) return <Carregando />
 
   const { nome, descricao, logo } = organizacao.dados
 
@@ -47,13 +47,13 @@ export function Inicio() {
       </Col>
       <Col md={7}>
         <h2>Olá, {usuario.nome}!</h2>
-        <h5 className="mt-4">Sua próxima aula</h5>
-        {aula.dados ? (
+        <h5 className="mt-4">Sua próxima consulta</h5>
+        {consulta.dados ? (
           <ListGroup className="mb-3">
-            <AulaItem aula={aula.dados} />
+            <ConsultaItem consulta={consulta.dados} />
           </ListGroup>
         ) : (
-          <p className="text-secondary">Você não tem aulas agendadas.</p>
+          <p className="text-secondary">Você não tem consultas agendadas.</p>
         )}
         <Button as={Link} to="/agendar" size="lg">
           <i className="bi bi-calendar-plus"></i> Agendar
